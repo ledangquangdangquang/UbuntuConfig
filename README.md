@@ -2,9 +2,8 @@
 
 <div align="center">
 
-![Ubuntu](https://img.shields.io/badge/NixOS-22.05-24273A.svg?logo=ubuntu&logoColor=CAD3F5&colorA=24273A&colorB=8aadf4)
-![Wayland](https://img.shields.io/badge/nixpkgs-unstable-informational.svg?style=flat&logo=wayland&logoColor=CAD3F5&colorA=24273A&colorB=8aadf4)
-![Niri Window Manager](https://img.shields.io/badge/i3-4.24-blue?logo=niri&logoColor=CAD3F5&colorA=24273A&colorB=8aadf4)
+![Ubuntu](https://img.shields.io/badge/ubuntu-26.04-orange?logo=ubuntu&logoColor=orange)
+![Niri](https://img.shields.io/badge/wayland-26.04-orange?logo=niri&logoColor=orange)
 
 </div>
 
