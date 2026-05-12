@@ -1,0 +1,22 @@
+# Disable newline after the prompt
+add_newline = false
+
+# Define the prompt format
+format = """
+[╭─](purple) $directory$git_branch
+[╰─](purple) $character 
+"""
+
+# Configure the directory section
+[directory]
+style = "purple"
+
+# Configure the Git branch section
+[git_branch]
+symbol = " "
+style = "purple"
+
+# Configure the character section for success and error states
+[character]
+success_symbol = "[󰄛](purple)"
+error_symbol = "[󰄛](red)"

@@ -1,0 +1,7 @@
+[user]
+	name = ledangquangdangquang
+	email = ldquang1@gmail.com
+[alias]
+	acp = "!f() { git add . && git commit -m \"$1\" && git push; }; f"
+[init]
+	defaultBranch = main
