@@ -4,13 +4,14 @@
   pkgs,
   hostMain,
   user,
+  nixgl,
   ...
 }: let
   dotfiles = "${config.home.homeDirectory}/UbuntuConfig/dotfiles";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
 
   # Tạo danh sách các ứng dụng cần tạo symlink từ thư mục dotfiles
-  configApps = ["weathr" "vicinae"  "fastfetch" "btop" "bat" "DankMaterialShell" "nvim" "niri" "kitty" "starship" "yazi" ];
+  configApps = ["foot" "weathr" "vicinae"  "fastfetch" "btop" "bat" "DankMaterialShell" "nvim" "niri" "kitty" "starship" "yazi" ];
 in {
   imports = [
     inputs.catppuccin.homeModules.catppuccin
@@ -38,7 +39,6 @@ in {
     tree
     bat
     git
-    kitty
     fuzzel
     fastfetch
     swaybg
@@ -52,5 +52,7 @@ in {
     gcc
     yazi
     starship
+    kitty
+    foot
   ];
 }
