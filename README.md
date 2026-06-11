@@ -8,9 +8,6 @@
 
 </div>
 
-## SHOWCASE
-![zathura](./assets/zathura.png) 
-![btop yazi and neofetch](./assets/full-terminal.png) 
 
 ## SETUP
 ```

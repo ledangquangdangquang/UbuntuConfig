@@ -4,7 +4,8 @@
   firefox-addons,
   inputs,
   ...
-}: {
+}: 
+{
   catppuccin.firefox.enable = true;
 
   programs.firefox = {
@@ -18,6 +19,12 @@
     policies = {
       # about:support
       ExtensionSettings = {
+        # DDict
+        "jid1-wC71d7poAZYEGA@jetpack" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/3918715/ddict-4.4.1.xpi";
+          installation_mode = "force_installed";
+        };
+
         # FirefoxColor
         "FirefoxColor@mozilla.com" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/3643624/firefox_color-2.1.7.xpi";
