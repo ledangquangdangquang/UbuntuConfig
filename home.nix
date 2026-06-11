@@ -8,9 +8,11 @@
 }: let
   dotfiles = "${config.home.homeDirectory}/UbuntuConfig/dotfiles";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+
+  # Tạo danh sách các ứng dụng cần tạo symlink từ thư mục dotfiles
+  configApps = ["weathr" "vicinae"  "fastfetch" "btop" "bat" "DankMaterialShell" "nvim" "niri" "kitty" "starship" "yazi" ];
 in {
   imports = [
-    inputs.noctalia.homeModules.default
     inputs.catppuccin.homeModules.catppuccin
     ./modules
   ];
@@ -18,34 +20,16 @@ in {
   home.homeDirectory = "/home/${user}";
   home.stateVersion = hostMain.stateVersion;
   targets.genericLinux.enable = true;
-# ---------------------------------------------------------------------------
-# ------------------------------ CONFIG FILE --------------------------------
-# ---------------------------------------------------------------------------
-  xdg.configFile."nvim" = {
-    source = create_symlink "${dotfiles}/nvim/";
-    recursive = true;
-  };
-  xdg.configFile."niri" = {
-    source = create_symlink "${dotfiles}/niri/";
-    recursive = true;
-  };
-  # programs.noctalia-shell.enable = true;
-  # xdg.configFile."noctalia" = {
-  #   source = create_symlink "${dotfiles}/noctalia/";
-  #   recursive = true;
-  # };
-  xdg.configFile."kitty" = {
-    source = create_symlink "${dotfiles}/kitty/";
-    recursive = true;
-  };
-  xdg.configFile."starship" = {
-    source = create_symlink "${dotfiles}/starship/";
-    recursive = true;
-  };
-  xdg.configFile."yazi" = {
-    source = create_symlink "${dotfiles}/yazi/";
-    recursive = true;
-  };
+
+  # Tối ưu hóa toàn bộ phần định nghĩa xdg.configFile cũ bằng một vòng lặp map
+  xdg.configFile = builtins.listToAttrs (map (app: {
+    name = app;
+    value = {
+      source = create_symlink "${dotfiles}/${app}/";
+      recursive = true;
+    };
+  }) configApps);
+
   home.packages = with pkgs; [
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
@@ -68,9 +52,5 @@ in {
     gcc
     yazi
     starship
-    libsForQt5.qt5.qtgraphicaleffects
-    libsForQt5.qt5.qtquickcontrols2
-    libsForQt5.qt5.qtsvg
-    libsForQt5.plasma-framework
   ];
 }

@@ -50,10 +50,6 @@
 
       modules = [
         ./home.nix
-        {
-          # Cấu hình backup tránh xung đột file dotfile có sẵn trên Ubuntu
-          home.backupFileExtension = "backup";
-        }
       ];
     };
   };
