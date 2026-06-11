@@ -1,0 +1,38 @@
+# Hanoi, Vietnam
+# Hide the HUD (Heads Up Display) with weather details
+hide_hud = false
+
+# Run silently without startup messages (errors still shown)
+silent = false
+
+[location]
+# Location coordinates (overridden if auto = true)
+latitude = 21.0285
+longitude = 105.8542
+
+# Auto-detect location via IP (defaults to true if config missing)
+auto = false
+
+# Hide the location name in the UI
+hide = false
+
+# How to display the location in the HUD: "coordinates" | "city" | "mixed"
+display = "mixed"
+
+# Optional: manually override the city name shown in the HUD.
+# When set, skips reverse geocoding entirely.
+# city = "Berlin"
+
+# Language for the resolved city name. "auto" uses the locale of the coordinates.
+# Accepts BCP-47 language tags: "en", "de", "ru", "ja", etc.
+# city_name_language = "auto"
+
+[units]
+# Temperature unit: "celsius" or "fahrenheit"
+temperature = "celsius"
+
+# Wind speed unit: "kmh", "ms", "mph", or "kn"
+wind_speed = "kmh"
+
+# Precipitation unit: "mm" or "inch"
+precipitation = "mm"

@@ -1,0 +1,264 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "type": "file",
+        "source": "~/.config/fastfetch/images/ryo2.txt",
+        "color": {
+            "1": "#b4befe",
+            // "1": "black",
+            "2": "red",
+            "3": "green",
+            "4": "yellow",
+            "5": "blue",
+            "6": "magenta",
+            "7": "cyan",
+            "8": "white",
+            "9": "default"
+        },
+        "padding": {
+            "top": 2,
+            "left": 2
+        }
+    },
+    "display": {
+        "separator": ": ",
+        "key": {
+            "width": 22
+        }
+    },
+    "modules": [
+        "break",
+        {
+            "type": "custom",
+            "format": "┌─────────────────────────────────────────────────────────────┐",
+            "outputColor": "#b4befe"
+        },
+        {
+            "type": "custom",
+            "key": "󰇅 Hardware",
+            "keyColor": "green",
+            "outputColor": "white"
+        },
+        {
+            "type": "host",
+            "key": "│ ├╴   Host",
+            "keyColor": "green",
+            "outputColor": "white"
+        },
+        {
+            "type": "command",
+            "shell": "/bin/sh",
+            "text": "hostname -s",
+            "key": "│ ├╴   Hostname",
+            "keyColor": "green",
+            "outputColor": "white"
+        },
+        {
+            "type": "cpu",
+            "key": "│ ├╴   CPU",
+            "showPeCoreCount": true,
+            "format": "{1}",
+            "keyColor": "green",
+            "outputColor": "white"
+        },
+        {
+            "type": "gpu",
+            "key": "│ ├╴ 󰢮  GPU",
+            "keyColor": "green",
+            "outputColor": "white",
+            "format": "{name} ({core-count}) @ {frequency}"
+        },
+        {
+            "type": "disk",
+            "key": "│ ├╴   Disk",
+            "keyColor": "green",
+            "outputColor": "white",
+            "format": "{size-used} / {size-total} ({size-percentage})"
+        },
+        {
+            "type": "memory",
+            "key": "│ ├╴   Memory",
+            "keyColor": "green",
+            "outputColor": "white",
+            "format": "{used} / {total} ({percentage})"
+        },
+        {
+            "type": "display",
+            "key": "│ ├╴ 󰍹  Display",
+            "keyColor": "green",
+            "outputColor": "white"
+        },
+        // {
+        //     "type": "keyboard",
+        //     "key": "│ ├╴   Keyboard",
+        //     "keyColor": "green",
+        //     "outputColor": "white"
+        // },
+        // {
+        //     "type": "command",
+        //     "shell": "/bin/sh",
+        //     "text": "ioreg -p IOUSB -l | grep -o -m1 -i -E 'ballzout|lesovoz|newtype36' || echo 'Built-in Keyboard'",
+        //     "key": "│ ├╴   Keyboard",
+        //     "keyColor": "green",
+        //     "outputColor": "white"
+        // },
+        // {
+        //     "type": "command",
+        //     "shell": "/bin/sh",
+        //     "text": "ioreg -p IOUSB -l | grep -o -m1 -i -E 'expert.?mouse.*tb.?800|kensington*|protoarc.*em.?04' || echo 'Built-in Trackpad'",
+        //     "key": "│ ├╴ 󰍽  Mouse",
+        //     "keyColor": "green",
+        //     "outputColor": "white"
+        // },
+        // {
+        //     "type": "mouse",
+        //     "key": "│ ├╴ 󰍽  Mouse",
+        //     "keyColor": "green",
+        //     "outputColor": "white"
+        // },
+        {
+            "type": "custom",
+            "key": " Software",
+            "keyColor": "blue",
+            "outputColor": "white"
+        },
+        {
+            "type": "os",
+            "key": "│ ├╴   OS",
+            "keyColor": "blue",
+            "outputColor": "white",
+            "format": "{name} {codename} {version}"
+        },
+        {
+            "type": "kernel",
+            "key": "│ ├╴   Kernel",
+            "keyColor": "blue",
+            "outputColor": "white"
+        },
+        {
+            "type": "packages",
+            "key": "│ ├╴ 󰏖  Packages",
+            "keyColor": "blue",
+            "outputColor": "white"
+        },
+        {
+            "type": "de",
+            "key": "  DE",
+            "keyColor": "blue",
+            "outputColor": "white"
+        },
+        {
+            "type": "lm",
+           "key": "│ ├╴   LM",
+            "keyColor": "blue",
+            "outputColor": "white"
+        },
+        {
+            "type": "wm",
+            "key": "│ ├╴ 󰧨  WM",
+            "keyColor": "blue",
+            "outputColor": "white"
+        },
+        {
+            "type": "wmtheme",
+            "key": "└ └╴ 󰉼  Theme",
+            "keyColor": "blue",
+            "outputColor": "white"
+        },
+        {
+            "type": "custom",
+            "key": " Terminal",
+            "keyColor": "black",
+            "outputColor": "white"
+        },
+        {
+            "type": "terminal",
+            "key": "│ ├╴   App",
+            "keyColor": "black",
+            "outputColor": "white"
+        },
+        {
+            "type": "shell",
+            "key": "│ ├╴   Shell",
+            "keyColor": "black",
+            "outputColor": "white"
+        },
+        {
+            "type": "command",
+            "shell": "/bin/sh",
+            "text": "echo 'Starship'",
+            "key": "│ ├╴ 󰉼  Prompt",
+            "keyColor": "black",
+            "outputColor": "white"
+        },
+        {
+            "type": "terminalfont",
+            "key": "│ ├╴ 󰛖  Font",
+            "keyColor": "black",
+            "outputColor": "white"
+        },
+        {
+            "type": "icons",
+            "key": "│ ├╴ 󰛖  Icons",
+            "keyColor": "black",
+            "outputColor": "white"
+        },
+        {
+            "type": "command",
+            "shell": "/bin/sh",
+            "text": "echo 'Power Rangers'",
+            "key": "└ └╴ 󰉼  Theme",
+            "keyColor": "black",
+            "outputColor": "white"
+        },
+        {
+            "type": "custom",
+            "key": " User",
+            "keyColor": "yellow",
+            "outputColor": "white"
+        },
+        {
+            "type": "users",
+            "key": "│ ├╴   Username",
+            "keyColor": "yellow",
+            "outputColor": "white",
+            "format": "{name}"
+        },
+        {
+            "type": "command",
+            "shell": "/bin/sh",
+            "text": "echo 'true'",
+            "key": "└ └╴ 󰀉  Noob",
+            "keyColor": "yellow",
+            "outputColor": "white"
+        },
+        {
+            "type": "custom",
+            "key": " Music",
+            "keyColor": "magenta",
+            "outputColor": "white"
+        },
+        {
+            "type": "media",
+            "key": "│ ├╴  Playing",
+            "keyColor": "magenta",
+            "outputColor": "white"
+        },
+        {
+            "type": "sound",
+            "key": "└ └╴ 󰋋 Output",
+            "keyColor": "magenta",
+            "outputColor": "white"
+        },
+        {
+            "type": "custom",
+            "format": "└─────────────────────────────────────────────────────────────┘",
+            "outputColor": "red"
+        },
+        {
+            "type": "custom",
+            "format": "            {#90}󰀉  {#31}󰀉  {#32}󰀉  {#33}󰀉  {#34}󰀉  {#35}󰀉  {#36}󰀉  {#37}󰀉 "
+        },
+        "break"
+    ]
+}

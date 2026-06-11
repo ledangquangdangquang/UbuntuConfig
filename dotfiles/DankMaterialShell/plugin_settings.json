@@ -1,0 +1,12 @@
+{
+  "niriScreenshot": {
+    "enabled": true
+  },
+  "dankPomodoroTimer": {
+    "enabled": true
+  },
+  "dms-niri-screenshot": {
+    "mode": "interactive",
+    "showPointer": false
+  }
+}
