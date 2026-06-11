@@ -11,6 +11,13 @@
 ![zathura](./assets/zathura.png) 
 ![btop yazi and neofetch](./assets/full-terminal.png) 
 
+## SETUP
+```
+echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
+```
+```
+nix run github:nix-community/home-manager -- switch --flake .#quang
+```
 ## KEYBOARD SHORTCUTS
 * View in `.config/niri/config.kdl`
 * View in `.config/kitty/kitty.conf`
