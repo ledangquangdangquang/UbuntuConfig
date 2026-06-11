@@ -4,7 +4,6 @@
   pkgs,
   hostMain,
   user,
-  nixgl,
   ...
 }: let
   dotfiles = "${config.home.homeDirectory}/UbuntuConfig/dotfiles";
@@ -35,6 +34,7 @@ in {
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
     wl-clipboard
+    vicinae
     fzf
     tree
     bat

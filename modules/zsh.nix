@@ -137,9 +137,10 @@ export PATH=$PATH:/home/quang/.spicetify
     # };
 
     shellAliases = {
+  
       c = "clear";
-      btw = "echo I use nixos, btw";
-      rebuild = "sudo nixos-rebuild switch --impure --flake ~/nixos-flakes-btw#${hostMain.hostname}";
+      btw = "echo I use NIX, btw";
+      rebuild = "nix run github:nix-community/home-manager -- switch --flake .#quang";
     };
 
     history.size = 10000;

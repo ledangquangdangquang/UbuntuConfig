@@ -9,6 +9,7 @@
 
   programs.firefox = {
     enable = true;
+    configPath = ".mozilla/firefox";
     package =
       if pkgs.stdenv.isDarwin
       then pkgs.firefox-bin
@@ -17,6 +18,12 @@
     policies = {
       # about:support
       ExtensionSettings = {
+        # FirefoxColor
+        "FirefoxColor@mozilla.com" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/3643624/firefox_color-2.1.7.xpi";
+          installation_mode = "force_installed";
+        };
+
         # Ublock origin
         "uBlock0@raymondhill.net" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";

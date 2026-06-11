@@ -1,6 +1,6 @@
 spawn-at-startup "noctalia-shell"
 spawn-at-startup "fcitx5"
-spawn-at-startup "kitty"
+spawn-at-startup "foot"
 spawn-at-startup "firefox"
 spawn-at-startup "vicinae" "server"
 spawn-sh-at-startup "swaybg -i ~/A_Setting_File/Wallpapers/wallpaper.png -m fill"
@@ -234,6 +234,7 @@ layer-rule {
 // niri msg pick-window
 window-rule {
     match app-id="kitty"
+    match app-id="foot"
     match title="nvim"
     match title="zsh"
     match title="fzf"
@@ -301,8 +302,8 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
-    Alt+F4 hotkey-overlay-title="Open a Terminal: kitty" { spawn "systemctl poweroff"; }
+    // Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
 
     // chmod +x ~/.config/wofi/wofi.sh # IMPORTANCE
     // Mod+Space hotkey-overlay-title="Run an Application: wofi" {
