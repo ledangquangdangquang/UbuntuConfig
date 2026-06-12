@@ -195,5 +195,5 @@
     display: -moz-box !important;
 }
 /* Remove duplicated window control buttons*/ 
-#nav-bar .titlebar-buttonbox{display: none !important
-}
+#nav-bar .titlebar-buttonbox{display: none !important}
+#tabbrowser-arrowscrollbox {max-height: 34px !important;}

@@ -245,7 +245,7 @@ window-rule {
     }
 }
 window-rule {
-    match app-id="firefox_firefox"
+    match app-id="firefox"
     // open-on-workspace "b"
     open-maximized true
     background-effect {
