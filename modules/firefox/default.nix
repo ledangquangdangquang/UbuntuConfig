@@ -6,8 +6,6 @@
   ...
 }: 
 {
-  catppuccin.firefox.enable = true;
-
   programs.firefox = {
     enable = true;
     configPath = ".mozilla/firefox";
@@ -70,11 +68,12 @@
         privateDefault = "ddg";
       };
       extensions.force = true; # override extension
-      # bookmarks.force = true; # override bookmark
       userChrome = ./FirefoxCss/chrome/userChrome.css;
-      settings = {
-        "widget.non-native-theme.enabled" = true;
-      };
+      extraConfig = builtins.readFile (pkgs.fetchurl {
+        url = "https://raw.githubusercontent.com/yokoffing/Betterfox/main/user.js";
+        sha256 = "sha256-6DJW9FMUkUViO1nOEZ4iyBRpI9Nk8C9u4s2Bh/Jv/K0=";
+        # Chạy `nix store prefetch-file <url>` để lấy SHA chuẩn nếu bị lỗi hash
+      });
     };
   };
 }

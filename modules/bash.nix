@@ -2,6 +2,8 @@
   programs.bash = {
     enable = true;
     bashrcExtra = ''
+    export PATH="$HOME/bin:$PATH"
+
     '';
     shellAliases = {
       c = "clear";

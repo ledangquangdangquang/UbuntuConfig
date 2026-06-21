@@ -25,7 +25,11 @@
       hostname = "ubuntu-nix"; # Tên định danh cấu hình (không ảnh hưởng hostname thật của Ubuntu)
       stateVersion = "25.11"; # Hoặc 24.11 tùy thuộc vào config cũ của anh
     };
-    pkgs = nixpkgs.legacyPackages.${system};
+    # pkgs = nixpkgs.legacyPackages.${system};
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
   in {
     # Thay thế nixosConfigurations bằng homeConfigurations độc lập
     homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {

@@ -54,5 +54,6 @@ in {
     starship
     kitty
     foot
+    kew
   ];
 }

@@ -8,6 +8,7 @@
     initContent = ''
     fastfetch
 export PATH="$PATH:/home/quang/.local/bin"
+export PATH="$HOME/bin:$PATH"
 
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
