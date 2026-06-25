@@ -86,10 +86,10 @@ nix build .#homeConfigurations.quang.activationPackage
 Build the Home Manager activation package and catch evaluation/build warnings.
 
 ```bash
-alejandra flake.nix home.nix modules
+nix fmt
 ```
 
-Format Nix files.
+Format Nix files with the formatter declared in `flake.nix`.
 
 ## Customization
 

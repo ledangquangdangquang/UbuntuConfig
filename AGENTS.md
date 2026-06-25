@@ -15,7 +15,7 @@ Add new Home Manager logic under `modules/` and add new app config folders under
 ## Build, Test, and Development Commands
 
 - `nix flake check` validates the flake outputs.
-- `alejandra .` formats Nix files with Alejandra, included in `home.packages`.
+- `nix fmt` formats Nix files with the flake formatter.
 - `nix run github:nix-community/home-manager -- switch --flake .#quang` applies the Home Manager configuration locally.
 - `home-manager switch --flake .#quang` applies the same config when Home Manager is already installed.
 

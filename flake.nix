@@ -31,6 +31,18 @@
       config.allowUnfree = true;
     };
   in {
+    formatter.${system} = pkgs.writeShellApplication {
+      name = "nix-fmt";
+      runtimeInputs = [pkgs.alejandra];
+      text = ''
+        if [ "$#" -eq 0 ]; then
+          exec alejandra .
+        else
+          exec alejandra "$@"
+        fi
+      '';
+    };
+
     # Thay thế nixosConfigurations bằng homeConfigurations độc lập
     homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
