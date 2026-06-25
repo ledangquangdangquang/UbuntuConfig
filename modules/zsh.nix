@@ -102,18 +102,13 @@
       fi
       }
 
-      # =========================================================
-      # function fuzzyvim
-      # =========================================================
-      fuzzyvim() {
-      local file
-      file=$(find . -type f \
-        | fzf --layout=reverse \
-              --height=80% \
-              --preview 'bat --style=numbers --color=always {}' \
-              --preview-window=right:60%) || return
-      nvim "$file"
+      fuzzyvim-widget() {
+        zle -I
+        fuzzyvim
+        zle reset-prompt
       }
+      zle -N fuzzyvim-widget
+      bindkey '^F' fuzzyvim-widget
 
       # =========================================================
       # alias
