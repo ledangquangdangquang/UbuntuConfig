@@ -55,5 +55,7 @@ in {
     kitty
     foot
     kew
+    ddcutil # brightness
+    eza # alterlative ls
   ];
 }

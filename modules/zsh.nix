@@ -114,33 +114,74 @@ file=$(find . -type f \
         --preview-window=right:60%) || return
 nvim "$file"
 }
-alias ll='ls -la'
+
+# =========================================================
+# alias 
+# =========================================================
+# ===== File =====
+alias ls='eza --icons'
+alias ll='eza -lah --icons'
+alias la='eza -a --icons'
+alias lt='eza --tree --level=2 --icons'
+
+# ===== Navigation =====
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# ===== Safer commands =====
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+
+# ===== System =====
+alias c='clear'
+alias h='history'
+alias df='df -h'
+alias du='du -sh *'
+alias free='free -h'
+
+# ===== Package =====
+alias update='sudo apt update && sudo apt upgrade'
+alias install='sudo apt install'
+
+# ===== Git =====
+alias g='git'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gp='git push'
+alias gl='git pull'
+alias gd='git diff'
+alias gco='git checkout'
+alias gb='git branch'
+
+# ===== Neovim =====
+alias v='nvim'
+alias vi='nvim'
+
+# ===== Python =====
+alias py='python3'
+alias pip='pip3'
+
+# ===== Misc =====
+alias cls='clear'
+alias q='exit'
+alias reload='source ~/.zshrc'
 alias gs='git status'
 alias update='sudo apt update && sudo apt upgrade'
-alias c='clear'
-alias ..='cd ..'
-
 # export GTK_DEBUG = interactive
-
 export PATH=$PATH:/home/quang/.spicetify
     '';
+
 
     oh-my-zsh = {
       enable = true;
       plugins = ["git" "sudo" "docker"];
       theme = "robbyrussell";
     };
-    # zplug = {
-    #   enable = true;
-    #   plugins = [
-    #     {name = "zsh-users/zsh-autosuggestions";}
-    #   ];
-    # };
-
     shellAliases = {
-  
-      c = "clear";
-      btw = "echo I use NIX, btw";
       rebuild = "nix run github:nix-community/home-manager -- switch --flake .#quang";
     };
 
