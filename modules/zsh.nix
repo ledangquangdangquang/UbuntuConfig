@@ -179,7 +179,7 @@
       theme = "robbyrussell";
     };
     shellAliases = {
-      rebuild = "nix run github:nix-community/home-manager -- switch --flake .#quang";
+      rebuild = "nix run github:nix-community/home-manager -- switch --flake .#$USER && nix fmt";
     };
 
     history.size = 10000;
