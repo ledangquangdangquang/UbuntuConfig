@@ -1,4 +1,4 @@
-{hostMain, ...}: {
+{...}: {
   programs.zsh = {
     enable = true;
     enableCompletion = true; # Đang bị comment, giữ nguyên
@@ -116,7 +116,7 @@ nvim "$file"
 }
 
 # =========================================================
-# alias 
+# alias
 # =========================================================
 # ===== File =====
 alias ls='eza --icons'
@@ -169,12 +169,9 @@ alias pip='pip3'
 alias cls='clear'
 alias q='exit'
 alias reload='source ~/.zshrc'
-alias gs='git status'
-alias update='sudo apt update && sudo apt upgrade'
 # export GTK_DEBUG = interactive
 export PATH=$PATH:/home/quang/.spicetify
     '';
-
 
     oh-my-zsh = {
       enable = true;

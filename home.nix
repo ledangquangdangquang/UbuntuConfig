@@ -10,12 +10,15 @@
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
 
   # Tạo danh sách các ứng dụng cần tạo symlink từ thư mục dotfiles
-  configApps = ["foot" "weathr" "vicinae"  "fastfetch" "btop" "bat" "DankMaterialShell" "nvim" "niri" "kitty" "starship" "yazi" ];
+  configApps = ["foot" "weathr" "vicinae" "fastfetch" "btop" "bat" "DankMaterialShell" "nvim" "niri" "kitty" "starship" "yazi"];
 in {
   imports = [
     inputs.catppuccin.homeModules.catppuccin
     ./modules
   ];
+
+  catppuccin.autoEnable = true;
+
   home.username = "${user}";
   home.homeDirectory = "/home/${user}";
   home.stateVersion = hostMain.stateVersion;
@@ -23,12 +26,13 @@ in {
 
   # Tối ưu hóa toàn bộ phần định nghĩa xdg.configFile cũ bằng một vòng lặp map
   xdg.configFile = builtins.listToAttrs (map (app: {
-    name = app;
-    value = {
-      source = create_symlink "${dotfiles}/${app}/";
-      recursive = true;
-    };
-  }) configApps);
+      name = app;
+      value = {
+        source = create_symlink "${dotfiles}/${app}/";
+        recursive = true;
+      };
+    })
+    configApps);
 
   home.packages = with pkgs; [
     nerd-fonts.fira-code

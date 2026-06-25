@@ -24,6 +24,7 @@
       name = "catppuccin-frappe-blue-standard";
       package = pkgs.catppuccin-gtk;
     };
+    gtk4.theme = config.gtk.theme;
     font = {
       name = "FiraCode Nerd Font";
       size = 11;

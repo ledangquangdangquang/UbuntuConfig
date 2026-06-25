@@ -1,11 +1,4 @@
-{
-  config,
-  pkgs,
-  firefox-addons,
-  inputs,
-  ...
-}: 
-{
+{pkgs, ...}: {
   programs.firefox = {
     enable = true;
     configPath = ".mozilla/firefox";

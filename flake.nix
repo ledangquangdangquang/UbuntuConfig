@@ -34,7 +34,7 @@
     # Thay thế nixosConfigurations bằng homeConfigurations độc lập
     homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      
+
       # Truyền các tham số đặc biệt vào file home.nix y hệt cấu hình cũ của anh
       extraSpecialArgs = {
         inherit inputs hostMain user;

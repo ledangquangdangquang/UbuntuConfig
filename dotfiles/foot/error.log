@@ -1,2 +1,0 @@
-
-(process:409227): GLib-GIO-CRITICAL **: 16:19:26.128: g_dbus_connection_emit_signal: assertion 'G_IS_DBUS_CONNECTION (connection)' failed
