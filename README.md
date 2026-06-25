@@ -1,46 +1,108 @@
-<h1 align="center"> My Ubuntu dotfiles</h1>
+# UbuntuConfig
 
-<div align="center">
+Personal Ubuntu dotfiles managed with Nix flakes and Home Manager.
 
-![Ubuntu](https://img.shields.io/badge/ubuntu-26.04-orange?logo=ubuntu&logoColor=orange)
-![Niri](https://img.shields.io/badge/wayland-26.04-orange?logo=niri&logoColor=orange)
-![Nix](https://img.shields.io/badge/nix-2.34.7-informational.svg?style=flat&logo=nixos&logoColor=CAD3F5&colorA=24273A&colorB=8aadf4)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-26.04-orange?logo=ubuntu&logoColor=white)
+![Wayland](https://img.shields.io/badge/Wayland-Niri-blue)
+![Nix](https://img.shields.io/badge/Nix-Flakes-informational?logo=nixos&logoColor=white)
 
-</div>
+## Overview
 
+This repository is built for a non-NixOS Ubuntu setup. Nix and Home Manager install user packages, manage shell/browser/GTK settings, and symlink application configs from this repo into `~/.config`.
 
-## SETUP
+Main stack:
+
+| Area | Tools |
+| --- | --- |
+| Shell | Zsh, Oh My Zsh, Starship |
+| Window manager | Niri on Wayland |
+| Terminal | Foot, Kitty |
+| Editor | Neovim |
+| Launcher/UI | Vicinae, DankMaterialShell |
+| File manager | Yazi |
+| Browser | Firefox |
+| Theme | Catppuccin, Bibata cursor, Nerd Fonts |
+
+## Repository Layout
+
+```text
+.
+├── flake.nix          # Flake inputs and Home Manager entry
+├── home.nix           # Packages, config symlinks, shared Home Manager setup
+├── modules/           # Focused Home Manager modules
+├── dotfiles/          # App configs linked into ~/.config
+├── Wallpapers/        # Wallpaper and avatar assets
+├── AGENTS.md          # Contributor/agent guide
+└── flake.lock         # Locked dependency versions
 ```
+
+Important modules:
+
+- `modules/zsh.nix`: Zsh setup, aliases, shell functions.
+- `modules/git.nix`: Git identity, Git alias, SSH config for GitHub.
+- `modules/gtk.nix`: GTK theme, fonts, cursor theme.
+- `modules/firefox/default.nix`: Firefox package, policies, profile config.
+
+## Setup
+
+Enable Nix flakes if needed:
+
+```bash
+mkdir -p ~/.config/nix
 echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
 ```
+
+Clone this repo to the expected path:
+
+```bash
+git clone git@github.com:ledangquangdangquang/UbuntuConfig.git ~/UbuntuConfig
+cd ~/UbuntuConfig
 ```
+
+Apply the Home Manager configuration:
+
+```bash
 nix run github:nix-community/home-manager -- switch --flake .#quang
 ```
-## KEYBOARD SHORTCUTS
-* View in `.config/niri/config.kdl`
-* View in `.config/kitty/kitty.conf`
-* View in `.config/nvim/README.md`
 
-## ALIAS
-* View in `.zshrc`
+After Home Manager is installed, you can use:
 
-## Components
+```bash
+home-manager switch --flake .#quang
+```
 
-| Component             | Version/Name                |
-|-----------------------|-----------------------------|
-| Distro                | Ubuntu|
-| Shell                 | Zsh|
-| Display Server        | Wayland                     |
-| WM (Compositor)       | Niri|
-| UI                    | Dank Linux|
-| Launcher              | Vicinae
-| Editor                | Neovim|
-| Terminal              | Foot + Starship          |
-| Fetch Utility         | Fastfetch                   |
-| Theme                 | Catppuccin Mocha 
-| Icons                 | Colloid-teal-dark, Numix-Circle |
-| Font                  | JetBrains Mono |
-| Player                | Kew + Spotify      |
-| File Browser          | Thunar + Yazi               |
-| Internet Browser      | Firefox + Vimium + NightTab + Stylus |
-| Mimetypes             | MPV, Imv, Zathura            |
+## Common Commands
+
+```bash
+nix flake check --no-build
+```
+
+Validate flake outputs without building everything.
+
+```bash
+nix build .#homeConfigurations.quang.activationPackage
+```
+
+Build the Home Manager activation package and catch evaluation/build warnings.
+
+```bash
+alejandra flake.nix home.nix modules
+```
+
+Format Nix files.
+
+## Customization
+
+To add a new app config:
+
+1. Put the config directory under `dotfiles/<app>/`.
+2. Add `<app>` to `configApps` in `home.nix`.
+3. Run `home-manager switch --flake .#quang`.
+
+User-specific values live in `flake.nix` and `home.nix`, including `user`, `hostname`, `homeDirectory`, and `stateVersion`.
+
+## Notes
+
+- Keyboard shortcuts are mainly in `dotfiles/niri/config.kdl`, `dotfiles/kitty/kitty.conf`, and the Neovim config.
+- Shell aliases are managed in `modules/zsh.nix`.
+- Do not commit secrets, SSH private keys, browser sessions, or generated logs.
