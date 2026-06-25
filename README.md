@@ -1,6 +1,5 @@
 # UbuntuConfig
 
-Personal Ubuntu dotfiles managed with Nix flakes and Home Manager.
 <div align="center">
 
 ![Ubuntu](https://img.shields.io/badge/ubuntu-26.04-orange?logo=ubuntu&logoColor=orange)
@@ -9,6 +8,7 @@ Personal Ubuntu dotfiles managed with Nix flakes and Home Manager.
 
 </div>
 
+Personal Ubuntu dotfiles managed with Nix flakes and Home Manager.
 ## Overview
 
 This repository is built for a non-NixOS Ubuntu setup. Nix and Home Manager install user packages, manage shell/browser/GTK settings, and symlink application configs from this repo into `~/.config`.
