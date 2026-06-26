@@ -9,6 +9,8 @@
 
 Personal Ubuntu dotfiles managed with Nix flakes and Home Manager.
 
+## Showcase 
+![screenshot](./assets/screenshot.png) 
 ## Quick Install
 
 Paste this into a terminal on Ubuntu:
