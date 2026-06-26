@@ -106,6 +106,20 @@ nix fmt
 
 Format Nix files with the formatter declared in `flake.nix`.
 
+## Maintenance
+
+Nix keeps old builds in `/nix/store`, so clean garbage when `/` is low on space or rebuild fails with a disk-space error:
+
+```bash
+nix store gc
+```
+
+Check disk usage before rebuilding:
+
+```bash
+df -h / /home
+```
+
 ## Customization
 
 To add a new app config:

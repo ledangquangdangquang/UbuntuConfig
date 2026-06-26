@@ -2,11 +2,12 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true; # Đang bị comment, giữ nguyên
+    completionInit = "autoload -U compinit && compinit -C";
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
     initContent = ''
-          fastfetch
+      fastfetch
       export PATH="$PATH:/home/quang/.local/bin"
       export PATH="$HOME/bin:$PATH"
 
