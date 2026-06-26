@@ -8,6 +8,17 @@
 
 
 Personal Ubuntu dotfiles managed with Nix flakes and Home Manager.
+
+## Quick Install
+
+Paste this into a terminal on Ubuntu:
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/ledangquangdangquang/UbuntuConfig/main/install.sh)
+```
+
+The script installs Nix if needed, enables flakes, clones this repo to `~/UbuntuConfig`, and applies the Home Manager profile `.#quang`.
+
 ## Overview
 
 This repository is built for a non-NixOS Ubuntu setup. Nix and Home Manager install user packages, manage shell/browser/GTK settings, and symlink application configs from this repo into `~/.config`.

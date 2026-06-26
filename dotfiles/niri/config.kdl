@@ -237,7 +237,7 @@ window-rule {
     match app-id="foot"
     match title="nvim"
     match title="zsh"
-    match title="fzf"
+    match title="fuzzyvim"
     open-maximized true
     background-effect {
         blur  true
