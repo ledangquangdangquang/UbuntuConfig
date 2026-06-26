@@ -37,8 +37,34 @@ ensure_apt_packages() {
 
 	ensure_command sudo || die "sudo is required to install: ${missing[*]}"
 	info "Installing required Ubuntu packages: ${missing[*]}"
+	wait_for_apt
 	sudo apt-get update
+	wait_for_apt
 	sudo DEBIAN_FRONTEND=noninteractive apt-get install -y "${missing[@]}"
+}
+
+wait_for_apt() {
+	local locks=(
+		/var/lib/dpkg/lock
+		/var/lib/dpkg/lock-frontend
+		/var/lib/apt/lists/lock
+		/var/cache/apt/archives/lock
+	)
+	local waited=0
+	local max_wait=300
+
+	while sudo fuser "${locks[@]}" >/dev/null 2>&1; do
+		if [ "$waited" -ge "$max_wait" ]; then
+			die "APT is still locked after ${max_wait}s. Close Software Updater/App Center, then run the install command again."
+		fi
+
+		if [ "$waited" -eq 0 ]; then
+			warn "APT is busy; waiting for Ubuntu's updater to finish"
+		fi
+
+		sleep 5
+		waited=$((waited + 5))
+	done
 }
 
 enable_flakes() {
