@@ -24,21 +24,56 @@ ensure_command() {
 }
 
 ensure_dependencies() {
-	local missing_commands=()
+	local missing_packages=()
 
-	for command_name in git curl xz; do
-		if ! ensure_command "$command_name"; then
-			missing_commands+=("$command_name")
-		fi
-	done
+	if ! ensure_command curl; then
+		missing_packages+=(curl)
+	fi
 
-	if [ "${#missing_commands[@]}" -gt 0 ]; then
-		die "Missing required command(s): ${missing_commands[*]}. Install them with: sudo apt install git curl xz-utils ca-certificates"
+	if ! ensure_command git; then
+		missing_packages+=(git)
+	fi
+
+	if ! ensure_command xz; then
+		missing_packages+=(xz-utils)
+	fi
+
+	if [ "${#missing_packages[@]}" -gt 0 ]; then
+		ensure_command sudo || die "sudo is required to install: ${missing_packages[*]}"
+		info "Installing missing package(s): ${missing_packages[*]}"
+		wait_for_apt
+		sudo apt-get update
+		wait_for_apt
+		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y "${missing_packages[@]}"
 	fi
 
 	if [ ! -d /etc/ssl/certs ]; then
 		warn "Could not find /etc/ssl/certs. If downloads fail, install ca-certificates."
 	fi
+}
+
+wait_for_apt() {
+	local locks=(
+		/var/lib/dpkg/lock
+		/var/lib/dpkg/lock-frontend
+		/var/lib/apt/lists/lock
+		/var/cache/apt/archives/lock
+	)
+	local waited=0
+	local max_wait=300
+
+	while sudo fuser "${locks[@]}" >/dev/null 2>&1; do
+		if [ "$waited" -ge "$max_wait" ]; then
+			die "APT is still locked after ${max_wait}s. Close Software Updater/App Center, then run the install command again."
+		fi
+
+		if [ "$waited" -eq 0 ]; then
+			warn "APT is busy; waiting for Ubuntu's updater to finish"
+		fi
+
+		sleep 5
+		waited=$((waited + 5))
+	done
 }
 
 enable_flakes() {
