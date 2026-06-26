@@ -165,6 +165,31 @@ switch_home_manager() {
 	fi
 }
 
+set_default_shell() {
+	local zsh_path="$HOME/.nix-profile/bin/zsh"
+	local current_shell
+
+	if [ ! -x "$zsh_path" ]; then
+		warn "Could not find $zsh_path; skipping default shell change"
+		return
+	fi
+
+	current_shell="$(getent passwd "$profile" | cut -d: -f7)"
+	if [ "$current_shell" = "$zsh_path" ]; then
+		info "Default shell is already zsh"
+		return
+	fi
+
+	if ! grep -Fxq "$zsh_path" /etc/shells; then
+		ensure_command sudo || die "sudo is required to add $zsh_path to /etc/shells"
+		info "Adding Nix zsh to /etc/shells"
+		printf '%s\n' "$zsh_path" | sudo tee -a /etc/shells >/dev/null
+	fi
+
+	info "Changing default shell for $profile to zsh"
+	chsh -s "$zsh_path" "$profile"
+}
+
 main() {
 	ensure_dependencies
 	install_nix
@@ -173,6 +198,7 @@ main() {
 	prepare_repo
 	verify_repo
 	switch_home_manager
+	set_default_shell
 	info "Done. Restart your shell if new commands are not available yet."
 }
 

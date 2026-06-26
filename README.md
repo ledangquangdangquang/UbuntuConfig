@@ -17,7 +17,7 @@ Paste this into a terminal on Ubuntu:
 bash <(curl -fsSL https://raw.githubusercontent.com/ledangquangdangquang/UbuntuConfig/main/install.sh)
 ```
 
-The script installs Nix if needed, enables flakes, clones this repo to `~/UbuntuConfig`, and applies the Home Manager profile for the current Linux user.
+The script installs Nix if needed, enables flakes, clones this repo to `~/UbuntuConfig`, applies the Home Manager profile for the current Linux user, and sets zsh as the default shell.
 
 ## Overview
 
