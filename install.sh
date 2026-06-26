@@ -3,7 +3,7 @@ set -euo pipefail
 
 repo_url="${REPO_URL:-https://github.com/ledangquangdangquang/UbuntuConfig.git}"
 repo_dir="${REPO_DIR:-$HOME/UbuntuConfig}"
-profile="${HM_PROFILE:-quang}"
+profile="${HM_PROFILE:-${USER:-$(id -un)}}"
 backup_ext="${HM_BACKUP_EXT:-backup}"
 
 info() {
@@ -156,11 +156,12 @@ verify_repo() {
 
 switch_home_manager() {
 	info "Applying Home Manager profile: $profile"
+	export USER="$profile"
 
 	if ensure_command home-manager; then
-		home-manager switch -b "$backup_ext" --flake "$repo_dir#$profile"
+		home-manager switch --impure -b "$backup_ext" --flake "$repo_dir#$profile"
 	else
-		nix run github:nix-community/home-manager -- switch -b "$backup_ext" --flake "$repo_dir#$profile"
+		nix run github:nix-community/home-manager -- switch --impure -b "$backup_ext" --flake "$repo_dir#$profile"
 	fi
 }
 

@@ -19,7 +19,11 @@
     ...
   }: let
     system = "x86_64-linux";
-    user = "quang"; # Lưu ý: Đổi đúng theo username trên Ubuntu của anh
+    envUser = builtins.getEnv "USER";
+    user =
+      if envUser != ""
+      then envUser
+      else "quang";
 
     hostMain = {
       hostname = "ubuntu-nix"; # Tên định danh cấu hình (không ảnh hưởng hostname thật của Ubuntu)

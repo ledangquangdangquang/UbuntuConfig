@@ -17,7 +17,7 @@ Paste this into a terminal on Ubuntu:
 bash <(curl -fsSL https://raw.githubusercontent.com/ledangquangdangquang/UbuntuConfig/main/install.sh)
 ```
 
-The script installs Nix if needed, enables flakes, clones this repo to `~/UbuntuConfig`, and applies the Home Manager profile `.#quang`.
+The script installs Nix if needed, enables flakes, clones this repo to `~/UbuntuConfig`, and applies the Home Manager profile for the current Linux user.
 
 ## Overview
 
@@ -72,16 +72,16 @@ git clone git@github.com:ledangquangdangquang/UbuntuConfig.git ~/UbuntuConfig
 cd ~/UbuntuConfig
 ```
 
-Apply the Home Manager configuration:
+Apply the Home Manager configuration for the current Linux user:
 
 ```bash
-nix run github:nix-community/home-manager -- switch --flake .#quang
+USER="$(id -un)" nix run github:nix-community/home-manager -- switch --impure --flake ".#$(id -un)"
 ```
 
 After Home Manager is installed, you can use:
 
 ```bash
-home-manager switch --flake .#quang
+USER="$(id -un)" home-manager switch --impure --flake ".#$(id -un)"
 ```
 
 ## Common Commands
