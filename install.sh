@@ -4,6 +4,7 @@ set -euo pipefail
 repo_url="${REPO_URL:-https://github.com/ledangquangdangquang/UbuntuConfig.git}"
 repo_dir="${REPO_DIR:-$HOME/UbuntuConfig}"
 profile="${HM_PROFILE:-quang}"
+backup_ext="${HM_BACKUP_EXT:-backup}"
 
 info() {
 	printf '\033[1;34m==>\033[0m %s\n' "$*"
@@ -122,9 +123,9 @@ switch_home_manager() {
 	info "Applying Home Manager profile: $profile"
 
 	if ensure_command home-manager; then
-		home-manager switch --flake "$repo_dir#$profile"
+		home-manager switch -b "$backup_ext" --flake "$repo_dir#$profile"
 	else
-		nix run github:nix-community/home-manager -- switch --flake "$repo_dir#$profile"
+		nix run github:nix-community/home-manager -- switch -b "$backup_ext" --flake "$repo_dir#$profile"
 	fi
 }
 
