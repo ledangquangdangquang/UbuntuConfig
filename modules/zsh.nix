@@ -82,7 +82,6 @@
 
       # Comments
       ZSH_HIGHLIGHT_STYLES[comment]='fg=#6c7086,italic'              # overlay0
-      source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
       # =========================================================
       # Sửa lại function y() cho Yazi: cd vào thư mục đã chọn
       # =========================================================
@@ -168,13 +167,8 @@
       export PATH=$PATH:/home/quang/.spicetify
     '';
 
-    oh-my-zsh = {
-      enable = true;
-      plugins = ["git" "sudo" "docker"];
-      theme = "robbyrussell";
-    };
     shellAliases = {
-      rebuild = "nix run github:nix-community/home-manager -- switch --flake .#$USER && nix fmt";
+      rebuild = "USER=\"$(id -un)\" nix run github:nix-community/home-manager -- switch --impure --flake \".#$(id -un)\" && nix fmt";
     };
 
     history.size = 10000;
