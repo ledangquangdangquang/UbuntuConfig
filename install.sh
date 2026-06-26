@@ -82,11 +82,23 @@ prepare_repo() {
 		info "Using existing repo at $repo_dir"
 		git -C "$repo_dir" remote set-url origin "$repo_url"
 
-		if git -C "$repo_dir" diff --quiet && git -C "$repo_dir" diff --cached --quiet; then
-			info "Updating repo"
-			git -C "$repo_dir" pull --ff-only
-		else
-			warn "Local changes detected in $repo_dir; skipping git pull"
+		local stash_ref=""
+		if ! git -C "$repo_dir" diff --quiet ||
+			! git -C "$repo_dir" diff --cached --quiet ||
+			[ -n "$(git -C "$repo_dir" ls-files --others --exclude-standard)" ]; then
+			warn "Local changes detected; stashing them before update"
+			git -C "$repo_dir" stash push --include-untracked -m "install.sh auto-stash $(date +%Y-%m-%dT%H:%M:%S%z)"
+			stash_ref="$(git -C "$repo_dir" stash list -n 1 --format='%gd')"
+		fi
+
+		info "Updating repo"
+		git -C "$repo_dir" pull --ff-only
+
+		if [ -n "$stash_ref" ]; then
+			info "Restoring stashed local changes"
+			if ! git -C "$repo_dir" stash pop "$stash_ref"; then
+				warn "Could not apply the stash cleanly. Your changes are still saved in git stash."
+			fi
 		fi
 		return
 	fi
@@ -97,6 +109,14 @@ prepare_repo() {
 
 	info "Cloning dotfiles into $repo_dir"
 	git clone "$repo_url" "$repo_dir"
+}
+
+verify_repo() {
+	if ! grep -q '"foot"' "$repo_dir/home.nix" || [ ! -f "$repo_dir/dotfiles/foot/foot.ini" ]; then
+		die "Repo at $repo_dir does not contain the expected foot config. Check that it is on the latest main branch."
+	fi
+
+	info "Repo commit: $(git -C "$repo_dir" rev-parse --short HEAD)"
 }
 
 switch_home_manager() {
@@ -115,6 +135,7 @@ main() {
 	enable_flakes
 	load_nix_profile
 	prepare_repo
+	verify_repo
 	switch_home_manager
 	info "Done. Restart your shell if new commands are not available yet."
 }
