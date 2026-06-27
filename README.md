@@ -3,7 +3,7 @@
 
 
 ![Ubuntu](https://img.shields.io/badge/ubuntu-26.04-orange?logo=ubuntu&logoColor=orange)
-![Niri](https://img.shields.io/badge/wayland-26.04-orange?logo=niri&logoColor=orange)
+![Niri](https://img.shields.io/badge/niri-26.04-orange?logo=niri&logoColor=orange)
 ![Nix](https://img.shields.io/badge/nixpkgs-2.34.7-informational.svg?style=flat&logo=nixos&logoColor=CAD3F5&colorA=24273A&colorB=8aadf4)
 
 
