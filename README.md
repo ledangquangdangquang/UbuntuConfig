@@ -114,6 +114,13 @@ Nix keeps old builds in `/nix/store`, so clean garbage when `/` is low on space 
 nix store gc
 ```
 
+This configuration also enables a weekly user timer that keeps the last 7 days of user and Home Manager profile history, then runs garbage collection:
+
+```bash
+systemctl --user list-timers nix-cleanup.timer
+systemctl --user start nix-cleanup.service
+```
+
 Check disk usage before rebuilding:
 
 ```bash
