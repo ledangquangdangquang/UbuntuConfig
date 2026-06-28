@@ -111,6 +111,26 @@ Format Nix files with the formatter declared in `flake.nix`.
 
 Prefix key: `Alt-a`.
 
+Start tmux manually when needed:
+
+```bash
+tmux new -A -s main
+```
+
+Basic session commands:
+
+```bash
+tmux ls                         # List sessions
+tmux new -s work                # Create a new session
+tmux new -A -s main             # Create or attach to main
+tmux attach -t work             # Attach from outside tmux
+tmux switch-client -t work      # Switch session from inside tmux
+tmux kill-session -t work       # Remove a session
+tmux kill-server                # Remove all sessions
+```
+
+Use `attach` only from a normal shell. If already inside tmux, use `switch-client` or `Alt-a` then `s`.
+
 | Shortcut | Action |
 | --- | --- |
 | `Alt-a` then `f` | Open `tmux-sessionizer` project picker with `fzf` |
@@ -128,11 +148,7 @@ Prefix key: `Alt-a`.
 | `Alt-Shift-l` | Resize pane right by 5 cells |
 | Copy mode `y` | Copy selection to Wayland clipboard with `wl-copy` |
 
-Tmux automatically attaches to the `main` session when opening an interactive shell. To skip auto attach for one shell, run:
-
-```bash
-TMUX_NO_AUTO_ATTACH=1 zsh
-```
+`Alt-a` shortcuts only work inside tmux.
 
 Sessions are saved every 15 minutes with `tmux-continuum` and restored after reboot with `tmux-resurrect`.
 

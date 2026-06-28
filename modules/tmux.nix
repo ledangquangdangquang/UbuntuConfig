@@ -43,52 +43,53 @@
       fi
     '';
   };
-
-  autoAttach = ''
-    if [[ -z "$TMUX" && -z "$VSCODE_INJECTION" && -z "$TMUX_NO_AUTO_ATTACH" && -t 0 && -t 1 ]]; then
-      exec tmux new-session -A -s main
-    fi
-  '';
 in {
   home.packages = [tmux-sessionizer];
-
-  programs.zsh.initContent = autoAttach;
-  programs.bash.bashrcExtra = autoAttach;
 
   programs.tmux = {
     enable = true;
     baseIndex = 1;
     clock24 = true;
     escapeTime = 10;
+    historyLimit = 50000;
     keyMode = "vi";
     mouse = true;
     prefix = "M-a";
+    sensibleOnTop = true;
     terminal = "tmux-256color";
 
     plugins = with pkgs.tmuxPlugins; [
-      sensible
-      catppuccin
-      resurrect
-      continuum
+      {
+        plugin = catppuccin;
+        extraConfig = ''
+          set -g @catppuccin_flavor 'mocha'
+          set -g @catppuccin_window_status_style 'rounded'
+          set -g @catppuccin_window_number_position 'right'
+          set -g @catppuccin_status_modules_right 'session date_time'
+          set -g @catppuccin_date_time_text '%H:%M %d/%m/%Y'
+        '';
+      }
+      {
+        plugin = resurrect;
+        extraConfig = ''
+          set -g @resurrect-capture-pane-contents 'on'
+          set -g @resurrect-strategy-nvim 'session'
+        '';
+      }
+      {
+        plugin = continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '15'
+        '';
+      }
     ];
 
     extraConfig = ''
       set -g renumber-windows on
-      set -g history-limit 50000
       set -g set-clipboard on
 
       set -g status-position top
-
-      set -g @catppuccin_flavor 'mocha'
-      set -g @catppuccin_window_status_style 'rounded'
-      set -g @catppuccin_window_number_position 'right'
-      set -g @catppuccin_status_modules_right 'session date_time'
-      set -g @catppuccin_date_time_text '%H:%M %d/%m/%Y'
-
-      set -g @continuum-restore 'on'
-      set -g @continuum-save-interval '15'
-      set -g @resurrect-capture-pane-contents 'on'
-      set -g @resurrect-strategy-nvim 'session'
 
       bind r source-file ~/.config/tmux/tmux.conf \; display-message 'tmux config reloaded'
       bind f display-popup -E "${tmux-sessionizer}/bin/tmux-sessionizer"
