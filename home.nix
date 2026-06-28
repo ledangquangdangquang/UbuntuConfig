@@ -63,6 +63,7 @@ in {
     nerd-fonts.jetbrains-mono
     wl-clipboard
     vicinae
+    brave
     fzf
     tree
     bat
@@ -89,5 +90,7 @@ in {
     ddcutil # brightness
     eza # alterlative ls
     fuzzyvim
+    discord
+    opencode
   ];
 }

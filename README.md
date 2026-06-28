@@ -31,7 +31,7 @@ Main stack:
 | --- | --- |
 | Shell | Zsh, Oh My Zsh, Starship |
 | Window manager | Niri on Wayland |
-| Terminal | Foot, Kitty |
+| Terminal | Foot, Kitty, Tmux |
 | Editor | Neovim |
 | Launcher/UI | Vicinae, DankMaterialShell |
 | File manager | Yazi |
@@ -56,6 +56,7 @@ Important modules:
 - `modules/zsh.nix`: Zsh setup, aliases, shell functions.
 - `modules/git.nix`: Git identity, Git alias, SSH config for GitHub.
 - `modules/gtk.nix`: GTK theme, fonts, cursor theme.
+- `modules/tmux.nix`: Tmux prefix, session restore, sessionizer, clipboard, and theme.
 - `modules/firefox/default.nix`: Firefox package, policies, profile config.
 
 ## Setup
@@ -105,6 +106,35 @@ nix fmt
 ```
 
 Format Nix files with the formatter declared in `flake.nix`.
+
+## Tmux Shortcuts
+
+Prefix key: `Alt-a`.
+
+| Shortcut | Action |
+| --- | --- |
+| `Alt-a` then `f` | Open `tmux-sessionizer` project picker with `fzf` |
+| `Alt-a` then `r` | Reload tmux config |
+| `Alt-a` then `\|` | Split pane horizontally in the current directory |
+| `Alt-a` then `-` | Split pane vertically in the current directory |
+| `Alt-a` then `c` | Create a new window in the current directory |
+| `Alt-h` | Move to the left pane |
+| `Alt-j` | Move to the pane below |
+| `Alt-k` | Move to the pane above |
+| `Alt-l` | Move to the right pane |
+| `Alt-Shift-h` | Resize pane left by 5 cells |
+| `Alt-Shift-j` | Resize pane down by 5 cells |
+| `Alt-Shift-k` | Resize pane up by 5 cells |
+| `Alt-Shift-l` | Resize pane right by 5 cells |
+| Copy mode `y` | Copy selection to Wayland clipboard with `wl-copy` |
+
+Tmux automatically attaches to the `main` session when opening an interactive shell. To skip auto attach for one shell, run:
+
+```bash
+TMUX_NO_AUTO_ATTACH=1 zsh
+```
+
+Sessions are saved every 15 minutes with `tmux-continuum` and restored after reboot with `tmux-resurrect`.
 
 ## Maintenance
 
