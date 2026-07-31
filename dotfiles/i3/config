@@ -41,11 +41,11 @@ bindsym $mod+Return exec foot
 # Launch Nautilus file manager
 bindsym $mod+e exec nautilus --new-window
 # Launch Firefox
-bindsym $mod+Shift+f exec firefox          
+bindsym $mod+Shift+f exec firefox
 # Zathura for documentation
-bindsym $mod+Shift+z exec zathura          
+bindsym $mod+Shift+z exec zathura
 # Close focused window
-bindsym $mod+q kill               
+bindsym $mod+q kill
 # Power menu
 bindsym $mod+x exec power-menu
 # Launch Fuzzel
@@ -56,10 +56,10 @@ bindsym $mod+Ctrl+b exec bluetooth-menu
 # Clipboard history
 bindsym $mod+v exec clipboard-menu
 bindsym $mod+Shift+v exec clipboard-clear
-# Reload Sway config
+# Reload i3 config
 bindsym $mod+Shift+r reload
 # Key shortcut reference
-bindsym $mod+i exec ~/.config/sway/show-keyshortcuts.sh
+bindsym $mod+i exec ~/.config/i3/show-keyshortcuts.sh
 # Notifications
 bindsym $mod+n exec swaync-client -t
 bindsym $mod+Shift+n exec swaync-client -d
@@ -70,11 +70,11 @@ bindsym Ctrl+F8 exec screenshot copy
 # Toggle 4000K night light
 bindsym F9 exec system-control night-light
 
-output * bg ~/UbuntuConfig/Wallpapers/catppuccin-abstract-eclipse-1920x1080.png fill
+exec --no-startup-id feh --bg-fill --no-fehbg ~/UbuntuConfig/Wallpapers/catppuccin-abstract-eclipse-1920x1080.png
 
 # Move focus between windows
 bindsym $mod+h focus left
-bindsym $mod+j focus down 
+bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
@@ -85,14 +85,13 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+j move down
 
 # resise window
-bindsym $mod+Ctrl+h resize shrink width 10px  
-bindsym $mod+Ctrl+l resize grow width 10px  
-bindsym $mod+Ctrl+k resize grow height 10px  
+bindsym $mod+Ctrl+h resize shrink width 10px
+bindsym $mod+Ctrl+l resize grow width 10px
+bindsym $mod+Ctrl+k resize grow height 10px
 bindsym $mod+Ctrl+j resize shrink height 10px
 
 # Layout preset: master 70% / stack 30%
-bindsym $mod+Backslash resize set width 70 ppt  
-
+bindsym $mod+Backslash resize set width 70 ppt
 
 # Brightness
 # Increase brightness
@@ -114,9 +113,9 @@ bindsym --release Caps_Lock exec system-control caps-lock
 
 # Workspace
 # Open it while starting up
-exec swaymsg workspace 1
+exec --no-startup-id i3-msg workspace 1
 for_window [title="^.*"] title_format ""
-default_border none 
+default_border none
 bar {
   position top
   height 28
@@ -127,8 +126,6 @@ bar {
   colors {
     background         $base
     statusline         $text
-    focused_statusline $text
-    focused_separator  $base
 
     # target           border bg        text
     focused_workspace  $base  $mauve    $crust
@@ -141,21 +138,21 @@ bar {
 bindsym $mod+Shift+t bar mode toggle
 # Workspaces define
 # any
-bindsym $mod+a workspace A 
+bindsym $mod+a workspace A
 # setting
-bindsym $mod+s workspace S 
+bindsym $mod+s workspace S
 # documents
-bindsym $mod+d workspace D 
+bindsym $mod+d workspace D
 # coding
-bindsym $mod+c workspace C 
+bindsym $mod+c workspace C
 # browser
-bindsym $mod+b workspace B 
+bindsym $mod+b workspace B
 
-bindsym $mod+1 workspace 1 
-bindsym $mod+2 workspace 2 
-bindsym $mod+3 workspace 3 
-bindsym $mod+4 workspace 4 
-bindsym $mod+5 workspace 5 
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
 
 # Workspaces moving
 bindsym $mod+Shift+a move container to workspace A
@@ -169,10 +166,9 @@ bindsym $mod+Shift+3 move container to workspace 3
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 # Which app is assigned to which workspace
-assign [app_id="firefox"] workspace B
-assign [app_id="zathura"] workspace D
-assign [app_id="foot"] workspace 1
-for_window [app_id="firefox"] workspace B
-for_window [app_id="zathura"] workspace D
-for_window [app_id="foot"] workspace 1
-include /etc/sway/config.d/*
+assign [class="firefox"] workspace B
+assign [class="zathura"] workspace D
+assign [class="foot"] workspace 1
+for_window [class="firefox"] workspace B
+for_window [class="zathura"] workspace D
+for_window [class="foot"] workspace 1
